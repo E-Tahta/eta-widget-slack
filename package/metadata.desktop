@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=Slack
+Comment=Records the beginning and ending time of classes
+
+Type=Service
+ServiceTypes=Plasma/Applet
+Icon=
+
+X-Plasma-MainScript=ui/main.qml
+X-KDE-Library=slack_library
+X-KDE-PluginInfo-Name=tr.org.etap.slack
+X-KDE-PluginInfo-Category=Utility
+X-KDE-PluginInfo-Author=Hikmet Baş      
+X-KDE-PluginInfo-Email=hikmet.bas@pardus.org.tr
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=https://etap.org.tr               
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-ServiceTypes=Plasma/Applet
