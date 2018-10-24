@@ -28,10 +28,6 @@
 #include <Plasma/DeclarativeWidget>
 #include <Plasma/Package>
 
-#include <X11/XKBlib.h>
-#include <qx11info_x11.h>
-#include <X11/extensions/XTest.h>
-
 #include <QProcess>
 
 #include "syslog.h"
