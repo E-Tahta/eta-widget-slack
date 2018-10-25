@@ -1,3 +1,9 @@
+eta-widget-slack (1.3) unstable; urgency=medium
+
+  * Hide cursor
+
+ -- Hikmet Baş <hikmet.bas@pardus.org.tr>  Thu, 25 Oct 2018 12:56:56 +0000
+
 eta-widget-slack (1.2) unstable; urgency=medium
 
   * Fix sound path
