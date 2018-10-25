@@ -1,3 +1,9 @@
+eta-widget-slack (1.2) unstable; urgency=medium
+
+  * Fix sound path
+
+ -- Hikmet Baş <hikmet.bas@pardus.org.tr>  Thu, 25 Oct 2018 06:03:44 +0000
+
 eta-widget-slack (1.1) unstable; urgency=medium
 
   * Remove unnecessary includes
