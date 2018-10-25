@@ -32,6 +32,8 @@ Rectangle {
     color:"transparent"
     smooth: true
 
+    x: 75
+
     property string prevState: bell.state
 
     property int bellSize: 100

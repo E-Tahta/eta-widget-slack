@@ -11,6 +11,8 @@
 #include <QtGui/QGraphicsLinearLayout>
 #include <QtDeclarative/QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeContext>
+#include <QProcess>
+#include <QCursor>
 
 #include <KCModuleInfo>
 #include <KCModuleProxy>
@@ -28,8 +30,6 @@
 #include <Plasma/DeclarativeWidget>
 #include <Plasma/Package>
 
-#include <QProcess>
-
 #include "syslog.h"
 
 Slack::Slack(QObject *parent, const QVariantList &args)
@@ -46,11 +46,7 @@ Slack::Slack(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(false);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setBackgroundHints(NoBackground);
-
-    QDesktopWidget dw;
-    int width = dw.screenGeometry(dw.primaryScreen()).width();
-    int height = dw.screenGeometry(dw.primaryScreen()).height();
-    resize(QSizeF(width*5/100, height*20/100));
+    setMinimumSize(260,400);
 
 }
 
@@ -78,6 +74,7 @@ void Slack::initDeclarativeUI()
     layout->addItem(m_declarativeWidget);
     layout->setContentsMargins(0, 0, 0, 0);
 
+    setCursor(QCursor(Qt::BlankCursor));
     setLayout(layout);
 }
 
@@ -128,31 +125,22 @@ void Slack::playSound(QString sound)
 {
     if (sound.compare("CONFIRMATION") == 0) {
       QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/confirmation.ogg");
-      qDebug() << "ses confirm";
     }
     
     if (sound.compare("STARTED") == 0) {
       QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/start.ogg");
-            qDebug() << "ses start";
-
     }
     
     if (sound.compare("STOPPED") == 0) {
       QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/stop.ogg");
-            qDebug() << "ses stop";
-
     }
     
     if (sound.compare("LISTOPENED") == 0) {
       QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/openlist.ogg");
-            qDebug() << "ses listopen";
-
     }
     
     if (sound.compare("LISTCLOSED") == 0) {
       QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/closelist.ogg");
-            qDebug() << "ses listclose";
-
     }
 }
 
