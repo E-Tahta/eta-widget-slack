@@ -32,3 +32,4 @@ target_link_libraries(slack_library
 install(TARGETS slack_library DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/kde4/)
 install(FILES eta-widget-slack.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/kde4/services/)
 install(DIRECTORY package/ DESTINATION ${CMAKE_INSTALL_PREFIX}/share/kde4/apps/plasma/packages/tr.org.etap.slack)
+install(FILES 15-eta-widget-slack-position.js DESTINATION ${CMAKE_INSTALL_PREFIX}/share/kde4/apps/plasma-desktop/init/)
