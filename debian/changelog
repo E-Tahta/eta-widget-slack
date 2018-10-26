@@ -1,3 +1,9 @@
+eta-widget-slack (1.6) unstable; urgency=medium
+
+  * Fix position and colors
+
+ -- Hikmet Baş <hikmet.bas@pardus.org.tr>  Fri, 26 Oct 2018 12:54:36 +0000
+
 eta-widget-slack (1.5) unstable; urgency=medium
 
   * Disable plasmoid for ogrenci user
