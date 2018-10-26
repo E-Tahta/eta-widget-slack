@@ -6,7 +6,7 @@ a = activities()
 
 for (i in a) {
     slack = a[i].addWidget("tr.org.etap.slack")
-    slack.writeConfig("geometry", QRectF(1707,56,96,50))
+    slack.writeConfig("geometry", QRectF(1580,95,260,400))
     a[i].locked = true
 }
 

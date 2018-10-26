@@ -39,8 +39,8 @@ Rectangle {
     property int bellSize: 100
     property int bellRadius: 50
 
-    property int stopRadius: 30
-    property int listRadius: 10
+    property int stopRadius: 7
+    property int listRadius: 5
 
     property int confirmButtonsSize: 50
     property int confirmButtonsRadius: 25
@@ -256,7 +256,7 @@ Rectangle {
         states: [
             State {
                 name: "STARTED"
-                PropertyChanges { target: bell; color: "#FF6C00"}
+                PropertyChanges { target: bell; color: "#383838"}
                 PropertyChanges { target: root; message: "Dersi Bitir"}
                 PropertyChanges { target: root; lecture: true}
 
@@ -265,7 +265,7 @@ Rectangle {
             },
             State {
                 name: "STOPPED"
-                PropertyChanges { target: bell; color: "#009688"}
+                PropertyChanges { target: bell; color: "#FF6C00"}
                 PropertyChanges { target: root; message: "Dersi Başlat"}
                 PropertyChanges { target: root; lecture: false}
 
@@ -273,7 +273,7 @@ Rectangle {
             },
             State {
                 name: "CONFIRMATION"
-                PropertyChanges { target: bell; color: "#FF6C00"}
+                PropertyChanges { target: bell; color: "#383838"}
                 PropertyChanges { target: root; message: "Emin misiniz?"}
 
             },
