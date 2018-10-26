@@ -35,6 +35,7 @@ private:
     void initDeclarativeUI();
     Plasma::DeclarativeWidget *m_declarativeWidget;
     bool lec;
+    bool isOgrenci;
     FileIO *f;
     Clock *c;
     NetworkManager *n;

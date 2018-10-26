@@ -34,9 +34,20 @@
 
 Slack::Slack(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-      lec(false)
+      lec(false),
+      isOgrenci(false)
 
 {
+
+    QString name = qgetenv("USER");
+    if (name.isEmpty())
+        name = qgetenv("USERNAME");
+    
+    if (name.compare("ogrenci") == 0) {
+        qDebug() << "Ogrenci is not allowed to use slack";
+        isOgrenci = true;
+    }
+    
     f = new FileIO(this);
     c = new Clock(this);
     n = new NetworkManager(this);
@@ -62,20 +73,25 @@ void Slack::init()
 
 void Slack::initDeclarativeUI()
 {
-    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
-    m_declarativeWidget = new Plasma::DeclarativeWidget(this);
-    m_declarativeWidget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+    if (isOgrenci) {
+        setVisible(false);
+    } else {
 
-    m_declarativeWidget->engine()->rootContext()->setContextProperty("slack", this);
+        QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
+        m_declarativeWidget = new Plasma::DeclarativeWidget(this);
+        m_declarativeWidget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
 
-    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    Plasma::Package package(QString(), "tr.org.etap.slack", structure);
-    m_declarativeWidget->setQmlPath(package.filePath("mainscript"));
-    layout->addItem(m_declarativeWidget);
-    layout->setContentsMargins(0, 0, 0, 0);
+        m_declarativeWidget->engine()->rootContext()->setContextProperty("slack", this);
 
-    setCursor(QCursor(Qt::BlankCursor));
-    setLayout(layout);
+        Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
+        Plasma::Package package(QString(), "tr.org.etap.slack", structure);
+        m_declarativeWidget->setQmlPath(package.filePath("mainscript"));
+        layout->addItem(m_declarativeWidget);
+        layout->setContentsMargins(0, 0, 0, 0);
+
+        setCursor(QCursor(Qt::BlankCursor));
+        setLayout(layout);
+    }
 }
 
 
@@ -86,61 +102,66 @@ bool Slack::lecture() const
 
 void Slack::setLecture(const bool &lecture)
 {
-    if(lec == true && lecture == false) {
-        if(c->isOkeyToSave()) {
+    if (!isOgrenci){
+        if(lec == true && lecture == false) {
+            if(c->isOkeyToSave()) {
 
-            f->writeData(startTime + "\t" + c->getCurrentTime() + "\t"
-                         + c->getCurrentDate());
-            this->getList();
+                f->writeData(startTime + "\t" + c->getCurrentTime() + "\t"
+                             + c->getCurrentDate());
+                this->getList();
 
-            setlogmask (LOG_UPTO (LOG_NOTICE));
-            openlog ("eta-slack", LOG_CONS | LOG_PID | LOG_NDELAY, LOG_LOCAL1);
+                setlogmask (LOG_UPTO (LOG_NOTICE));
+                openlog ("eta-slack", LOG_CONS | LOG_PID | LOG_NDELAY, LOG_LOCAL1);
 
-            message = startTime + " " + c->getCurrentTime() + " "
-                    + c->getCurrentDate() + " Mac Address: " + n->getMac()
-                    + " IP Address: " + n->getIP();
+                message = startTime + " " + c->getCurrentTime() + " "
+                        + c->getCurrentDate() + " Mac Address: " + n->getMac()
+                        + " IP Address: " + n->getIP();
 
-            QByteArray ba = message.toLatin1();
-            const char *cmessage = ba.data();
+                QByteArray ba = message.toLatin1();
+                const char *cmessage = ba.data();
 
-            syslog (LOG_NOTICE,"User: %s %s",getenv("USER"),cmessage  );
-            syslog (LOG_INFO, "bell rings");
+                syslog (LOG_NOTICE,"User: %s %s",getenv("USER"),cmessage  );
+                syslog (LOG_INFO, "bell rings");
 
-            closelog ();
+                closelog ();
+            }
+
+        } else {
+            startTime = c->getCurrentTime();
+            c->startCounting();
         }
-
-    } else {
-        startTime = c->getCurrentTime();
-        c->startCounting();
+        lec = lecture;
     }
-    lec = lecture;
 }
 
 QStringList Slack::getList()
 {
-    return f->readData();
+    if (!isOgrenci) {
+        return f->readData();
+    }
+    return QStringList("");
 }
 
 void Slack::playSound(QString sound)
 {
     if (sound.compare("CONFIRMATION") == 0) {
-      QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/confirmation.ogg");
+        QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/confirmation.ogg");
     }
     
     if (sound.compare("STARTED") == 0) {
-      QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/start.ogg");
+        QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/start.ogg");
     }
     
     if (sound.compare("STOPPED") == 0) {
-      QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/stop.ogg");
+        QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/stop.ogg");
     }
     
     if (sound.compare("LISTOPENED") == 0) {
-      QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/openlist.ogg");
+        QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/openlist.ogg");
     }
     
     if (sound.compare("LISTCLOSED") == 0) {
-      QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/closelist.ogg");
+        QProcess::startDetached("paplay /usr/share/kde4/apps/plasma/packages/tr.org.etap.slack/contents/sounds/closelist.ogg");
     }
 }
 
