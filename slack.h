@@ -27,14 +27,14 @@ public:
     ~Slack();
     void init();
     bool lecture() const;
-    void setLecture(const bool &lecture);
+    void setLecture(const bool &b);
     Q_INVOKABLE QStringList getList();
     Q_INVOKABLE void playSound(QString sound);
 
 private:
     void initDeclarativeUI();
     Plasma::DeclarativeWidget *m_declarativeWidget;
-    bool lec;
+    bool m_lecture;
     bool isOgrenci;
     FileIO *f;
     Clock *c;

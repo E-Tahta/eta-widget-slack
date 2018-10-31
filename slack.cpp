@@ -34,7 +34,7 @@
 
 Slack::Slack(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-      lec(false),
+      m_lecture(false),
       isOgrenci(false)
 
 {
@@ -97,13 +97,13 @@ void Slack::initDeclarativeUI()
 
 bool Slack::lecture() const
 {
-    return lec;
+    return m_lecture;
 }
 
-void Slack::setLecture(const bool &lecture)
+void Slack::setLecture(const bool &b)
 {
     if (!isOgrenci){
-        if(lec == true && lecture == false) {
+        if(m_lecture == true && b == false) {
             if(c->isOkeyToSave()) {
 
                 f->writeData(startTime + "\t" + c->getCurrentTime() + "\t"
@@ -130,7 +130,7 @@ void Slack::setLecture(const bool &lecture)
             startTime = c->getCurrentTime();
             c->startCounting();
         }
-        lec = lecture;
+        m_lecture = b;
     }
 }
 

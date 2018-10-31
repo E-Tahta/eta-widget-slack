@@ -33,7 +33,7 @@ void NetworkManager::setIP()
     QTcpSocket socket;
     socket.connectToHost("8.8.8.8", 53); // google DNS, or something else reliable
     if (socket.waitForConnected()) {
-       IP = socket.localAddress().toString();
+        IP = socket.localAddress().toString();
     }
 }
 

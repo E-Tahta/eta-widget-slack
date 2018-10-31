@@ -50,7 +50,7 @@ FileIO::FileIO(QObject *parent) :
             }
         }
 
-    } else {        
+    } else {
         d->mkpath(filepath);
         QFile file(fullpath);
     }
@@ -83,7 +83,7 @@ QStringList FileIO::readData()
 void FileIO::writeData(const QString &data)
 {
     if(!QDir::isAbsolutePath(filepath)) {
-      d->mkpath(filepath);
+        d->mkpath(filepath);
     }
     QFile file(fullpath);
     if (!file.open(QIODevice::Append)) {

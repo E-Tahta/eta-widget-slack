@@ -113,10 +113,10 @@ Rectangle {
                 width: parent.width
                 height: parent.height - txtLegend.height
                 anchors.top: txtLegend.bottom
-                model: slack.getList()
+                model: slack.getList().reverse()
                 delegate: Text {
                     text:modelData
-                    color: root.textColor
+                    color: index == 0 ? "#FF6C00" : root.textColor
                     horizontalAlignment: Text.AlignHCenter
                 }
                 focus: true
@@ -369,7 +369,7 @@ Rectangle {
         ]
         onStateChanged: {
             if (bell.state == "LIST") {
-                list.model = slack.getList()
+                list.model = slack.getList().reverse()
             }
         }
     }
