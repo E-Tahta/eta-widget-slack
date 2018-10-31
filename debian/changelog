@@ -1,3 +1,9 @@
+eta-widget-slack (1.9) unstable; urgency=medium
+
+  * Change list arrange and first line color
+
+ -- Hikmet Baş <hikmet.bas@pardus.org.tr>  Wed, 31 Oct 2018 09:22:08 +0000
+
 eta-widget-slack (1.8) unstable; urgency=medium
 
   * Add stop lecture on closing
