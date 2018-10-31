@@ -1,3 +1,9 @@
+eta-widget-slack (1.8) unstable; urgency=medium
+
+  * Add stop lecture on closing
+
+ -- Hikmet Baş <hikmet.bas@pardus.org.tr>  Wed, 31 Oct 2018 08:18:31 +0000
+
 eta-widget-slack (1.7) unstable; urgency=medium
 
   * Fix fill list bug
