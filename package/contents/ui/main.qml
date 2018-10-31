@@ -367,6 +367,11 @@ Rectangle {
 
             }
         ]
+        onStateChanged: {
+            if (bell.state == "LIST") {
+                list.model = slack.getList()
+            }
+        }
     }
 
     Component.onCompleted: {
