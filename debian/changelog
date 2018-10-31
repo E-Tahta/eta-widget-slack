@@ -1,3 +1,9 @@
+eta-widget-slack (1.7) unstable; urgency=medium
+
+  * Fix fill list bug
+
+ -- Hikmet Baş <hikmet.bas@pardus.org.tr>  Wed, 31 Oct 2018 06:21:48 +0000
+
 eta-widget-slack (1.6) unstable; urgency=medium
 
   * Fix position and colors
