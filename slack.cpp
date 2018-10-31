@@ -63,7 +63,7 @@ Slack::Slack(QObject *parent, const QVariantList &args)
 
 Slack::~Slack()
 {
-
+    setLecture(false);
 }
 
 void Slack::init()
