@@ -8,6 +8,6 @@ Homepage: http://pardus.org.tr
 
 Package: eta-widget-slack
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, eta-slack
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Etkileşimli Tahta Arayüzü Ders Zamanı Kayıt Programı
  Tek tıkla ders ve teneffüs modları arası geçiş kolaylığı.
